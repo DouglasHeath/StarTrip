@@ -409,14 +409,14 @@ function transfer()
                     }      
                     else
                     {
-                        gameMessages = "<br><br>This isn't a suitable location for transfer." + 
-                        "<br><br>The Dignitary from Andros III grows impatient.";
+                        gameMessages = "<br>This isn't a suitable location for transfer." + 
+                        "<br>The Dignitary from Andros III grows impatient.";
                         errorSound();
                     }
                     break;
                         
                     case "dilithium":
-                    gameMessages = "<br><br>Engineering suggest holding on to the dilithium.";
+                    gameMessages = "<br>>Engineering suggest holding on to the dilithium.";
                     errorSound();
                     break;
                 }
