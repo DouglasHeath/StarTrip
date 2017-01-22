@@ -416,7 +416,7 @@ function transfer()
                     break;
                         
                     case "dilithium":
-                    gameMessages = "You cannot transfer the dilithium here.";
+                    gameMessages = "<br><br>Engineering suggest holding on to the dilithium.";
                     errorSound();
                     break;
                 }
