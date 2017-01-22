@@ -177,12 +177,12 @@ function explode()
 
 function saveSound()
 {
-    document.getElementById('saveGame').innerHTML = "<saveGame src='sounds/ok.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/ok.mp3' autostart=true loop=false hidden=true>";
 }
 
 function resumeSound()
 {
-    document.getElementById('resumeGame').innerHTML = "<resumeGame src='sounds/resume.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/resume.mp3' autostart=true loop=false hidden=true>";
 }
 
 // Displaying the player's location
