@@ -626,6 +626,7 @@ function endGame()
 // Save game state for returning to it later
 function saveGame()
 {
+    saveSound();
     localStorage.clear();
     //make suere browser supports it
     if(typeof(Storage)!=="undefined")
@@ -641,7 +642,6 @@ function saveGame()
             console.log(localStorage);
             input.value = "";
             document.getElementById('input').focus();
-            saveSound();
         }
     //if the browser doesn't support local save
     else
@@ -662,10 +662,10 @@ function resumeGame()
     romulan = JSON.parse(localStorage.getItem("romulan_data_key"));
     cargo = JSON.parse(localStorage.getItem("cargo_data_key"));
     moveCrosshair();
+    resumeSound();
     gameMessages = "";
     input.value = "";
     document.getElementById('input').focus();
-    resumeSound();
     render();
 }
 
