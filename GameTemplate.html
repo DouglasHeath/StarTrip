@@ -7,7 +7,7 @@
 	<link href="css/game.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
 </head>
-<body>
+<body onload="localStorageCheck()">
     
     <div id="mainBoard">
      
@@ -44,7 +44,13 @@
     <div id="alert">
     </div>
     
+    <div>
+        <button id="saveGame">SAVE</button>
+    </div>
     
+    <div> 
+        <button id="resumeGame">resume</button>       
+    </div>
     
     
     <div class="audioWrapper">

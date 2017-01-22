@@ -98,6 +98,34 @@ input
     left: 385px; 
 }
 
+#saveGame
+{
+    position: absolute;
+    left: 865px;
+    top: 163px;
+    width: 160px;
+    height: 48px;
+    padding: 2px;
+    background-color: transparent;
+    border-radius: 24px;
+    font-size: 20px;
+    font-family: 'Play';
+}
+
+#resumeGame
+{
+    position: absolute;
+    left: 697px;
+    top: 163px;
+    width: 160px;
+    height: 48px;
+    padding: 2px;
+    background-color: transparent;
+    border-radius: 24px;
+    font-size: 20px;
+    font-family: 'Play';
+}
+
 .audioWrapper
 {
     display: table;
@@ -273,3 +301,4 @@ input
     background-color: black;
     font-family: 'Play', sans-serif;
 }
+

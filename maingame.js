@@ -42,13 +42,15 @@ blockedMovement[7] = "Navigation suggests finding an alternative course, Captain
 blockedMovement[8] = "Navigation using that course not recommended due to the density of the asteroid field. Aternative direction is advised.";
 
 // Create in-game items at beginning of game
-var items = ["dignitary", "Romulans"];
-var itemLocations = [2, 6];
+var items = ["dignitary"];
+var itemLocations = [2];
+var romulan = ["romulans"];
+var romLocation = [6];
 var itemsToAppear = [];
 var itemsToAppearLocations = [8];
 
 // Array to store items collected
-var storage = [];
+var cargo = [];
 
 // Initialize player commands
 var playersCommand = "";
@@ -78,8 +80,15 @@ var alertOutput = document.querySelector("#alert");
 
 // Engage Button
 var engage = document.getElementById('inputButton');
-//button.style.cursor = "pointer";
 engage.addEventListener("click", enterButton, false);
+
+// Save Game Button
+var save = document.getElementById('saveGame');
+save.addEventListener("click", saveGame, false);
+
+// Resume Game Button
+var resume = document.getElementById('resumeGame');
+resume.addEventListener("click", resumeGame, false);
 
 // Help Button
 var help = document.getElementById('helpButton');
@@ -170,12 +179,7 @@ function explode()
 render();
 document.getElementById('input').focus();
 
-// Main game logic
-function endGame()
-{
-    window.location.href = "Endpage.html";
-}
-
+// Main game logic and functions
 function playGame()
 {
      // These get reset from previous turn
@@ -296,6 +300,71 @@ function playGame()
     document.getElementById('input').focus();
 }
 
+function moveCrosshair()
+{
+   switch(playerLocation)
+       {
+           case 0:
+               {
+
+                   document.getElementById('crosshair').style.left = "325px";
+                   document.getElementById('crosshair').style.top = "23px";
+                   break;
+               }
+           case 1:
+               {
+                   document.getElementById('crosshair').style.left = "385px";
+                   document.getElementById('crosshair').style.top = "23px";
+                   break;
+               }             
+           case 2:
+               {
+                   document.getElementById('crosshair').style.left = "445px";
+                   document.getElementById('crosshair').style.top = "23px";
+                   break;
+               }
+           case 3:
+               {
+                   document.getElementById('crosshair').style.left = "325px";
+                   document.getElementById('crosshair').style.top = "83px";
+                   break;
+               }
+           case 4:
+               {
+                   break;
+               }
+           case 5:
+               {
+                   document.getElementById('crosshair').style.left = "445px";
+                   document.getElementById('crosshair').style.top = "83px";
+                   break;
+               }
+           case 6:
+               {
+                   document.getElementById('crosshair').style.left = "325px";
+                   document.getElementById('crosshair').style.top = "143px";
+                   break;
+               }
+           case 7:
+               {
+                   document.getElementById('crosshair').style.left = "385px";
+                   document.getElementById('crosshair').style.top = "143px";
+                   break;
+               }
+           case 8:
+               {
+                   document.getElementById('crosshair').style.left = "445px";
+                   document.getElementById('crosshair').style.top = "143px";
+                   break;
+               }
+           default:
+               {
+                   break;
+               }
+       }
+        
+}
+
 function beamUp()
 {
     // First find index of where the item is in the array
@@ -308,7 +377,7 @@ function beamUp()
             transporter();
             
             // Add it to the player's inventory
-            storage.push(item);
+            cargo.push(item);
             
             // Remove it from the game
             items.splice(itemIndex, 1);
@@ -316,7 +385,7 @@ function beamUp()
             
             // Console tests
             console.log("World items: " + items);
-            console.log("Storage items: " + storage);
+            console.log("Storage items: " + cargo);
         }
      else if(itemToAppearIndex !== -1 && itemsToAppearLocations[itemToAppearIndex] === playerLocation)
         {
@@ -324,7 +393,7 @@ function beamUp()
             transporter();
             
             // Add it to the player's inventory
-            storage.push(item);
+            cargo.push(item);
             // Remove it from the game
             itemsToAppear.splice(itemToAppearIndex, 1);
             itemsToAppearLocations.splice(itemToAppearIndex, 1);
@@ -351,7 +420,7 @@ function destroyed()
 function fireWeapon()
 {
     // First find index of where the item is in the array
-    var itemIndex = items.indexOf(item);
+    var itemIndex = romulan.indexOf(romulan);
     
     if(playerLocation === 6)
          {
@@ -361,7 +430,7 @@ function fireWeapon()
              torpedo();
              gameMessages = "<br><br>Photon torpedos fired!";
              setTimeout("destroyed()", 2000);
-             items.splice(itemIndex, 1);
+             romulan.splice(itemIndex, 1);
         }
 
     else
@@ -376,7 +445,7 @@ function fireWeapon()
 function transfer()
 {
     // First, find out if item is in storage
-    var storageIndex = storage.indexOf(item);
+    var storageIndex = cargo.indexOf(item);
     
     // If the index is -1, it isn't in storage
     // Alert player to the fact it isn't in storage
@@ -402,7 +471,7 @@ function transfer()
                     {
                         gameMessages = "<br><br>The Dignitary from Andros III thanks you for safe passage." +
                         "<br><br>Engineering states that the impulse engines need fuel.";
-                        storage.splice(storageIndex, 1);
+                        cargo.splice(storageIndex, 1);
                         passengerOutput.innerHTML = "";
                         itemsToAppear.push("dilithium");
                         transporter();
@@ -426,7 +495,7 @@ function transfer()
 function useItem()
 {
     // First, find out if item is in storage
-    var storageIndex = storage.indexOf(item);
+    var storageIndex = cargo.indexOf(item);
     
     // If the index is -1, it isn't in storage
     // Alert player to the fact it isn't in storage
@@ -452,7 +521,7 @@ function useItem()
                     {
                         gameMessages = "<br><br>The dilithium has been used to power the impulse engines.";
                         crystalOutput.innerHTML = "";
-                        storage.splice(storageIndex, 1);
+                        cargo.splice(storageIndex, 1);
                         warp();
                         setTimeout(endGame, 5000);
                     }                
@@ -490,9 +559,13 @@ function render()
                     output.innerHTML += "<br><br>Sensors indicate <em>"
                     + items[i] + "</em> found in this sector.";
                 }
-            // What if the Romluans are there?
-            if(playerLocation === itemLocations[i] && playerLocation === 6)
+        }
+    for(var i = 0; i < romulan.length; i ++)
+        {
+            if(playerLocation === romLocation[i])
                 {
+                    output.innerHTML += "<br><br>Sensors indicate <em>"
+                    + romulan[i] + "</em> found in this sector.";
                     alertOutput.innerHTML = "ALERT <br>" + "<br>" +
                     "<br> Condition" +
                     "<br> RED";
@@ -511,20 +584,79 @@ function render()
     
     // Display the game message and update inventory 
     output.innerHTML += "<br>" + gameMessages;
-    passengerOutput.innerHTML += "";
-    crystalOutput.innerHTML += "";
     
     // Display storage
-    if(storage.length !== 0)
+    if(cargo.length !== 0)
         {
             switch(item)
                 {
                     case "dignitary":
-                        passengerOutput.innerHTML = "Dignitary onboard";
-                        break;
+                        {
+                            passengerOutput.innerHTML = "Dignitary onboard";
+                            break;
+                        }
                     case "dilithium":
-                        crystalOutput.innerHTML = "Dilithium onboard";
-                        break;
+                        {
+                            crystalOutput.innerHTML = "Dilithium onboard";
+                            break;
+                        }
                 }       
         }
+    passengerOutput.innerHTML += "";
+    crystalOutput.innerHTML += "";
+}
+
+function endGame()
+{
+    window.location.href = "Endpage.html";
+}
+
+// Save game state for returning to it later
+function saveGame()
+{
+    localStorage.clear();
+    //make suere browser supports it
+    if(typeof(Storage)!=="undefined")
+        {
+
+            localStorage.setItem("player_data_key", JSON.stringify(playerLocation));
+            localStorage.setItem("start_data_key", JSON.stringify(items));
+            localStorage.setItem("appear_data_key", JSON.stringify(itemsToAppear));
+            localStorage.setItem("map_data_key", JSON.stringify(mapImages));
+            localStorage.setItem("item_data_key", JSON.stringify(item));
+            localStorage.setItem("romulan_data_key", JSON.stringify(romulan));
+            localStorage.setItem("cargo_data_key", JSON.stringify(cargo));
+            console.log(localStorage);
+            input.value = "";
+            document.getElementById('input').focus();
+        }
+    //if the browser doesn't support local save
+    else
+        {
+            // some code in here
+        }
+}
+
+//Return to saved state
+function resumeGame()
+{
+    // Pull all saved info from localStorage
+    playerLocation = JSON.parse(localStorage.getItem("player_data_key"));
+    items = JSON.parse(localStorage.getItem("start_data_key"));
+    itemsToAppear = JSON.parse(localStorage.getItem("appear_data_key"));    
+    item = JSON.parse(localStorage.getItem("item_data_key"));
+    mapImages = JSON.parse(localStorage.getItem("map_data_key"));
+    romulan = JSON.parse(localStorage.getItem("romulan_data_key"));
+    cargo = JSON.parse(localStorage.getItem("cargo_data_key"));
+    moveCrosshair();
+    gameMessages = "";
+    input.value = "";
+    document.getElementById('input').focus();
+    render();
+}
+
+// Used for debugging local storage and finding what is saved
+function localStorageCheck()
+{
+    console.log(localStorage);
 }
