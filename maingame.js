@@ -98,7 +98,7 @@ help.addEventListener("click", helpButton, false);
 var closeHelp = document.getElementById('closeHelp');
 closeHelp.addEventListener("click", closeHelpButton, false);
 
-// Various buttons and sounds
+// Various buttons
 function helpButton()
 {
     var el = document.getElementById('helpBox');
@@ -136,43 +136,53 @@ function enterButton()
 // Various sound effects
 function engageSound()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/engage.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/engage.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 function errorSound()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/fail.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/fail.mp3' autostart=true loop=false hidden=true>";
     return true; 
 }
 function nocomply()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/nocomply.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/nocomply.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 function transporter()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/transporter.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/transporter.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 function warp()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/warp.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/warp.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 function torpedo()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/torpedo.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/torpedo.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 function redAlert()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/alert.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/alert.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 function explode()
 {
-    document.getElementById('embed').innerHTML= "<embed src='sounds/explode.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById('embed').innerHTML = "<embed src='sounds/explode.mp3' autostart=true loop=false hidden=true>";
     return true;
+}
+
+function saveSound()
+{
+    document.getElementById('saveGame').innerHTML = "<saveGame src='sounds/ok.mp3' autostart=true loop=false hidden=true>";
+}
+
+function resumeSound()
+{
+    document.getElementById('resumeGame').innerHTML = "<resumeGame src='sounds/resume.mp3' autostart=true loop=false hidden=true>";
 }
 
 // Displaying the player's location
@@ -629,6 +639,7 @@ function saveGame()
             console.log(localStorage);
             input.value = "";
             document.getElementById('input').focus();
+            saveSound();
         }
     //if the browser doesn't support local save
     else
@@ -652,6 +663,7 @@ function resumeGame()
     gameMessages = "";
     input.value = "";
     document.getElementById('input').focus();
+    resumeSound();
     render();
 }
 
