@@ -642,7 +642,7 @@ function saveGame()
             console.log(localStorage);
             input.value = "";
             document.getElementById('input').focus();
-            output.innerHTML =  "Progress has been saved to onboard computer."
+            output.innerHTML =  "Progress has been saved to onboard computer.";
         }
     //if the browser doesn't support local save
     else
