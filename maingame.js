@@ -111,7 +111,7 @@ function helpButton()
     helpOutput.innerHTML = "Available commands: <br>" +
     "<br> Movement: <strong>Ahead / Reverse / Port / Starboard </strong><br>" +
     "<br> Engineering: Beam Up / Transfer / Use <br>" +
-    "<br> Weapons: Fire Topedos";
+    "<br> Weapons: Fire Torpedos";
 }
 
 function closeHelpButton()
