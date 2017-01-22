@@ -433,12 +433,14 @@ function useItem()
     if(storageIndex === -1)
         {
             gameMessages = "<br><br>Invalid entry.";
+            errorSound();
         }
     
     // If there isn't anything in storage then tell player
     if(storageIndex === 0)
         {
             gameMessages ="<br><br>Cargo hold is empty.";
+            errorSound();
         }
     // If the item is in storage, determine the use
     if(storageIndex !== -1)
