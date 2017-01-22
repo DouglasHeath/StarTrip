@@ -178,11 +178,13 @@ function explode()
 function saveSound()
 {
     document.getElementById('embed').innerHTML = "<embed src='sounds/ok.mp3' autostart=true loop=false hidden=true>";
+    return true;
 }
 
 function resumeSound()
 {
     document.getElementById('embed').innerHTML = "<embed src='sounds/resume.mp3' autostart=true loop=false hidden=true>";
+    return true;
 }
 
 // Displaying the player's location
