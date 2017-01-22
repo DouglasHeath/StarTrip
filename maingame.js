@@ -482,7 +482,7 @@ function transfer()
                     if(playerLocation === 0)
                     {
                         gameMessages = "<br><br>The Dignitary from Andros III thanks you for safe passage." +
-                        "<br><br>Engineering states that the impulse engines need fuel.";
+                        "<br><br>Engineering states that the impulse engines will need dilithium before entering wormhole.";
                         cargo.splice(storageIndex, 1);
                         passengerOutput.innerHTML = "";
                         itemsToAppear.push("dilithium");
