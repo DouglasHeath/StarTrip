@@ -131,17 +131,6 @@ input
     font-weight: bolder;
 }
 
-#resetButton
-{
-    position: absolute;
-    top: 171px;
-    left: 890px;
-    background-color: #9999FF;
-    border-radius: 14px;
-    font-size: 20px;
-    font-family: 'Play';
-}
-
 #inputButton
 {
     font-family: 'Play';
