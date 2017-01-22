@@ -320,7 +320,7 @@ function beamUp()
         }
      else if(itemToAppearIndex !== -1 && itemsToAppearLocations[itemToAppearIndex] === playerLocation)
         {
-            gameMessages = "<br><br>You beamed aboard the " + item + "." + "<br>Use it to power the engines at the wormhole.";
+            gameMessages = "<br><br>You beamed aboard the " + item + ".<br>Use it to power the engines at the wormhole.";
             transporter();
             
             // Add it to the player's inventory
