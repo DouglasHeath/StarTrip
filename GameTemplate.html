@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="Douglas Heath">
+	<title>Star Trek Adventure</title>
+	<link href="css/game.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+</head>
+<body>
+    
+    <div id="mainBoard">
+     
+     
+    <img id="viewScreen" src="" width="250" height="250"> 
+        
+    <div>
+        <img id="grid" src="images/whitegrid.png" alt="map grid">
+        <img id="crosshair" src="images/crosshairXSmall.png" alt="map location">
+        
+    </div>
+   
+    
+    
+    <div>
+        <p id="dilithium"></p>
+        <p id="passenger"></p>
+        <input type="button" id="resetButton" value="RESET SIMULATION">
+    </div>
+    
+    
+    
+    <div id="mainStory">
+        <p id="output"></p>
+    </div>
+
+    <div id="commandEntry">INPUT COMMANDS:
+        <input id="input" type="text"  size="61">
+        <input id="inputButton" type="button" value="E N G A G E" >
+        <input id="helpButton" type="button" value="H E L P">
+    </div>
+    
+    
+    <div id="alert">
+    </div>
+    
+    
+    
+    
+    <div class="audioWrapper">
+        <div class="audioHolder">
+            <audio autoplay loop>
+            <source src="sounds/bridge2.mp3" type="audio/mpeg">
+            <source src="sounds/bridge2.ogg" type="audio/ogg">
+        </audio>
+        </div>
+    </div>   
+    
+    <div id="computerBank">
+    </div>
+    
+    <div>
+        <img id="logo" src="images/starfleet.png" alt="logo">
+    </div>
+    
+    <div id="helpBox" style="display:none;">
+        <input id="closeHelp" type="button" value="C L O S E">
+        <p id="helpOutput"></p>
+    </div>
+    <div id="embed"></div>
+
+        
+    </div>
+    <script src="maingame.js" type="text/javascript"></script>
+</body>
+</html>

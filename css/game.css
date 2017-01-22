@@ -1,0 +1,286 @@
+@font-face
+{
+    font-family: 'MyFont';
+    src: url('../fonts/tt0106.ttf') format('truetype');    
+}
+
+html
+{
+    background-color: black;
+}
+
+h1
+{
+    font-size: 60px;
+    color: white;
+    text-align: center;
+}
+h3
+{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
+
+.startPage
+{
+    background-image: url(../images/title.jpg);
+    width: 1500px;
+    height: 900px;
+    position: aboslute;
+    margin: 0 auto;
+    background-color: black;
+    font-family: 'Play', sans-serif;
+    display: table;
+    text-align: center;
+}
+.energize
+{
+    font-family: 'Play', sans-serif;
+    position: absolute;
+    margin: 0 auto;
+    top: 800px;
+    font-size: 40px;
+}
+
+#mainBoard
+{
+    background-image: url(../images/Lcars_wallpaper.png);
+    background-repeat: no-repeat;
+    position: relative;
+    height: 768px;
+    width: 1024px;
+    margin: 0 auto;
+    background-color: black;
+    font-family: 'Play', sans-serif;
+}
+
+#commandEntry
+{
+    font-family: 'Play';
+    position: absolute;
+    top: 684px;
+    left: 180px;
+    color: white;
+    font-size: 18px;
+}
+
+input
+{
+    height: 18px;
+    border-radius: 5px;
+}
+
+#grid
+{
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: 18px;
+    left: 320px;
+}
+
+#logo
+{
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    left: 916px;
+    top: 15px;    
+}
+
+#crosshair
+{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 83px;
+    left: 385px; 
+}
+
+.audioWrapper
+{
+    display: table;
+    width: 1024px;
+    position: absolute;
+    top: 780px;
+}
+
+.audioHolder
+{
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#dilithium
+{
+    position: absolute;
+    top: 101px;
+    left: 876px;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+#passenger
+{
+    position: absolute;
+    top: 101px;
+    left: 708px;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+#resetButton
+{
+    position: absolute;
+    top: 171px;
+    left: 890px;
+    background-color: #9999FF;
+    border-radius: 14px;
+    font-size: 20px;
+    font-family: 'Play';
+}
+
+#inputButton
+{
+    font-family: 'Play';
+    height: 30px;
+    font-size: 18px;
+    background-color: #9999FF
+}
+
+#mainStory
+{
+    position: absolute;
+    color: white;
+    top: 320px;
+    left: 172px;
+    font-size: 24px;
+    width: 550px;
+    height: 370px;
+}
+
+#viewScreen
+{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 330px;
+    left: 732px;
+    border-color: #FF9966;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 14px;   
+}
+
+#alert
+{
+    color: white;
+    position: absolute;
+    top: 350px;
+    font-size: 24px;
+    width: 124px;
+    height: 134px;
+    left: 2px;
+    text-align: center
+    
+}
+
+#helpBox
+{
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    top: 320px;
+    left: 212px;  
+    border-radius: 14px;
+    background-color: #CC99CC;
+    font-size: 27px;
+    text-align: center;
+    font-weight: bolder;
+    font-family: 'Play', sans-serif;
+}
+
+#helpButton
+{
+    font-family: 'MyFont';
+    height: 30px;
+    font-size: 18px;
+    background-color: #9999FF;
+}
+
+#closeHelp
+{
+    font-family: 'Play';
+    height: 30px;
+    font-size: 18px;
+    background-color: #CC99CC;
+    position: absolute;
+    margin: 20px;
+    bottom: 0;
+    right: 0;
+}
+
+@-webkit-keyframes myAnimation 
+{
+      0% {background-image: url(../images/numbers1.png);opacity: 0;}
+   8.33% {background-image: url(../images/numbers1.png);opacity: 1;}
+  16.66% {background-image: url(../images/numbers1.png);opacity: 0;}
+
+     25% {background-image: url(../images/numbers2.png);opacity: 0;}
+  33.32% {background-image: url(../images/numbers2.png);opacity: 1;}
+  41.65% {background-image: url(../images/numbers2.png);opacity: 0;}
+
+     50% {background-image: url(../images/numbers3.png);opacity: 0;}
+  58.31% {background-image: url(../images/numbers3.png);opacity: 1;}
+  66.64% {background-image: url(../images/numbers3.png);opacity: 0;}
+
+     75% {background-image: url(../images/numbers4.png);opacity: 0;}
+   83.3% {background-image: url(../images/numbers4.png);opacity: 1;}
+  91.63% {background-image: url(../images/numbers4.png);opacity: 0;}
+    100% {opacity: 0;}
+}
+
+#computerBank
+{
+    position: absolute;
+    width: 124px;
+    height: 180px;
+    top: 538px;
+    left: 2px;
+    background-size: 100% 100%;
+    -webkit-animation: myAnimation 12s linear infinite;
+    -moz-animation: myAnimation 12s linear infinite;
+    -o-animation: myAnimation 12s linear infinite;
+}
+
+@-moz-keyframes myAnimation 
+{
+    0% { }
+   25% { }
+   50% { }
+   75% { }
+  100% { }
+}
+
+@-o-keyframes myAnimation 
+{
+    0% { }
+   25% { }
+   50% { }   
+   75% { }
+  100% { }
+}
+
+#endPage
+{
+    background-image: url(../images/endcredits.jpg);
+    background-repeat: no-repeat;
+    position: relative;
+    height: 900px;
+    width: 1600px;
+    margin: 0 auto;
+    background-color: black;
+    font-family: 'Play', sans-serif;
+}

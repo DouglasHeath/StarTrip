@@ -1,0 +1,32 @@
+html
+{
+    background-color: black;
+    color: white;
+    font-family: 'Play', sans-serif;
+    text-align: center;
+}
+
+.startPage
+{
+    background-image: url(../images/title.jpg);
+    background-repeat: no-repeat;
+    width: 1400px;
+    height: 900px;
+    position: aboslute;
+    margin: 0 auto;
+    background-color: black;
+    font-family: 'Play', sans-serif;
+    display: table;
+    font-weight: bold;
+}
+
+.energize
+{
+    font-family: 'Play', sans-serif;
+    margin: 0 auto;
+    padding: 4px;
+    font-size: 28px;
+    border-radius: 5px;
+}
+
+
