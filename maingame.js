@@ -287,7 +287,7 @@ function playGame()
                 break;
                 
             default:
-                gameMessages = "<br><br>Invalid command.";
+                gameMessages = "<br><br>Invalid entry.";
                 errorSound();
         }
     // reander the game
@@ -382,7 +382,7 @@ function transfer()
     // Alert player to the fact it isn't in storage
     if(storageIndex === -1)
         {
-            gameMessages = "<br><br>That does not exist onboard.";
+            gameMessages = "<br><br>Invalid entry.";
             errorSound();
         }
     
@@ -432,7 +432,7 @@ function useItem()
     // Alert player to the fact it isn't in storage
     if(storageIndex === -1)
         {
-            gameMessages = "<br><br>That does not exist onboard.";
+            gameMessages = "<br><br>Invalid entry.";
         }
     
     // If there isn't anything in storage then tell player
@@ -462,7 +462,7 @@ function useItem()
                     break;
                         
                     case "dignitary":
-                    gameMessages = "<br><br>Invalid command";
+                    gameMessages = "<br><br>Invalid entry.";
                     errorSound();
                     break;
                 }
