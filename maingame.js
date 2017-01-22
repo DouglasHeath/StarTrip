@@ -320,7 +320,7 @@ function beamUp()
         }
      else if(itemToAppearIndex !== -1 && itemsToAppearLocations[itemToAppearIndex] === playerLocation)
         {
-            gameMessages = "<br><br>You have beamed aboard the " + item + ".";
+            gameMessages = "<br><br>You have beamed aboard the " + item + "." + "<br>Use it to power the engines at the wormhole.";
             transporter();
             
             // Add it to the player's inventory
@@ -409,7 +409,7 @@ function transfer()
                     }      
                     else
                     {
-                        gameMessages = "<br>This isn't a suitable location for transfer." + 
+                        gameMessages = "<br><br>This isn't a suitable location for transfer." + 
                         "<br>The Dignitary from Andros III grows impatient.";
                         errorSound();
                     }
