@@ -44,7 +44,7 @@ blockedMovement[8] = "Navigation using that course not recommended due to the de
 // Create in-game items at beginning of game
 var items = ["dignitary"];
 var itemLocations = [2];
-var romulan = ["romulans"];
+var romulan = ["Romulans"];
 var romLocation = [6];
 var itemsToAppear = [];
 var itemsToAppearLocations = [8];
