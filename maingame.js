@@ -7,7 +7,7 @@ gameMap[2] = "Starbase Rama, site of the Council of Planets gathering. The starb
 gameMap[3] = "Entrance to the Bajoran Wormhole and passage to the Gamma Quadrant. Known in Bajor as The 'Celestial Temple'. It is only accessible to ships travelling at impulse velocities.";
 gameMap[4] = "Betazed is a remarkably lush, beautiful world, sometimes described as 'the jewel of the outer crown' by traders and other visitors. Its gravity and atmosphere are comparable to Earth, and water covers 78 percent of the planet's surface. Great expanses of natural wilderness cover much of the planet, varying from dense jungles to wide canyons and cliffs.";
 gameMap[5] = "A mysterious forcefield appears. Scanners indicate that this forcefield is the creation of the continium known only as 'Q'. Navigation reports that passage starboard of the ship is blocked and impassable.";
-gameMap[6] = "This sector is sparsely inhabited and located inside the Nuetral Zone.";
+gameMap[6] = "This sector is sparsely inhabited and located inside the Neutral Zone.";
 gameMap[7] = "The Betreka Nebula, located between the Klingon Empire and the Cardassian Union. This nebula is the site of the incident between the Cardassians and the Klingons over the planet Raknal V, which began an eighteen year long conflict.<br><br> Long range scanners indicate the presence of crystalline structures nearby.";
 gameMap[8] = "And asteroid field. Navigation through the field is limited and not recommended.";
 
