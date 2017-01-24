@@ -127,6 +127,18 @@ function closeHelpButton() {
     document.getElementById('helpBox').style.display = "none";
 }
 
+// If user decides to press ENTER instead of ENGAGE
+var wage = document.getElementById('input');
+wage.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        validate(e);
+    }
+});
+function validate(e) {
+    playGame();
+}
+
 function enterButton() {    
     playGame();
 }
