@@ -94,6 +94,10 @@ resume.addEventListener("click", resumeGame, false);
 var help = document.getElementById('helpButton');
 help.addEventListener("click", helpButton, false);
 
+// Reset Button
+var resetButton = document.getElementById('resetGame');
+resetButton.addEventListener("click", resetGame, false);
+
 // Closing help box
 var closeHelp = document.getElementById('closeHelp');
 closeHelp.addEventListener("click", closeHelpButton, false);
@@ -668,6 +672,12 @@ function resumeGame()
     input.value = "";
     document.getElementById('input').focus();
     render();
+}
+
+// Reset entire game
+function resetGame()
+{
+    window.location.reload();
 }
 
 // Used for debugging local storage and finding what is saved
