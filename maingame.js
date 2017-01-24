@@ -193,6 +193,7 @@ function resumeSound()
 
 // Displaying the player's location
 render();
+// 
 document.getElementById('input').focus();
 
 // Main game logic and functions
@@ -658,20 +659,33 @@ function saveGame()
 //Return to saved state
 function resumeGame()
 {
-    // Pull all saved info from localStorage
-    playerLocation = JSON.parse(localStorage.getItem("player_data_key"));
-    items = JSON.parse(localStorage.getItem("start_data_key"));
-    itemsToAppear = JSON.parse(localStorage.getItem("appear_data_key"));    
-    item = JSON.parse(localStorage.getItem("item_data_key"));
-    mapImages = JSON.parse(localStorage.getItem("map_data_key"));
-    romulan = JSON.parse(localStorage.getItem("romulan_data_key"));
-    cargo = JSON.parse(localStorage.getItem("cargo_data_key"));
-    moveCrosshair();
-    resumeSound();
-    gameMessages = "";
-    input.value = "";
-    document.getElementById('input').focus();
-    render();
+    var checkLocal = window.localStorage.getItem('player_data_key')
+    {
+        if (checkLocal === null || checkLocal === undefined || checkLocal === 0)
+            {
+                output.innerHTML = "No saved game exists.";
+                errorSound();
+                document.getElementById('input').focus();
+                
+            }
+        else
+            {
+                // Pull all saved info from localStorage
+                playerLocation = JSON.parse(localStorage.getItem("player_data_key"));
+                items = JSON.parse(localStorage.getItem("start_data_key"));
+                itemsToAppear = JSON.parse(localStorage.getItem("appear_data_key"));    
+                item = JSON.parse(localStorage.getItem("item_data_key"));
+                mapImages = JSON.parse(localStorage.getItem("map_data_key"));
+                romulan = JSON.parse(localStorage.getItem("romulan_data_key"));
+                cargo = JSON.parse(localStorage.getItem("cargo_data_key"));
+                moveCrosshair();
+                resumeSound();
+                gameMessages = "";
+                input.value = "";
+                document.getElementById('input').focus();
+                render();
+            }
+    }
 }
 
 // Reset entire game
