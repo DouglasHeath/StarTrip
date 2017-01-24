@@ -128,8 +128,8 @@ function closeHelpButton() {
 }
 
 // If user decides to press ENTER instead of ENGAGE
-var wage = document.getElementById('input');
-wage.addEventListener("keydown", function (e) {
+var enterKey = document.getElementById('input');
+enterKey.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
         e.preventDefault();
         validate(e);
