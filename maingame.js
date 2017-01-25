@@ -68,7 +68,7 @@ var knownItems = ["dignitary", "dilithium", "romulans"];
 var item = "";
 
 // Element for the viewscreen images
-var image = document.getElementById('viewScreen');
+var image = document.getElementById("viewScreen");
 
 // Command and game message fields
 var output = document.querySelector("#output");
@@ -79,32 +79,32 @@ var crystalOutput = document.querySelector("#dilithium");
 var alertOutput = document.querySelector("#alert");
 
 // Engage Button
-var engage = document.getElementById('inputButton');
+var engage = document.getElementById("inputButton");
 engage.addEventListener("click", enterButton, false);
 
 // Save Game Button
-var save = document.getElementById('saveGame');
+var save = document.getElementById("saveGame");
 save.addEventListener("click", saveGame, false);
 
 // Resume Game Button
-var resume = document.getElementById('resumeGame');
+var resume = document.getElementById("resumeGame");
 resume.addEventListener("click", resumeGame, false);
 
 // Help Button
-var help = document.getElementById('helpButton');
+var help = document.getElementById("helpButton");
 help.addEventListener("click", helpButton, false);
 
 // Reset Button
-var resetButton = document.getElementById('resetGame');
+var resetButton = document.getElementById("resetGame");
 resetButton.addEventListener("click", resetGame, false);
 
 // Closing help box
-var closeHelp = document.getElementById('closeHelp');
+var closeHelp = document.getElementById("closeHelp");
 closeHelp.addEventListener("click", closeHelpButton, false);
 
 // Various buttons
 function helpButton() {
-    var el = document.getElementById('helpBox');
+    var el = document.getElementById("helpBox");
     function fadeIn(el) {
         el.style.opacity = 0;
         var tick = function () {
@@ -116,7 +116,7 @@ function helpButton() {
         tick();
     }   
     fadeIn(el); 
-    document.getElementById('helpBox').style.display = "block";
+    document.getElementById("helpBox").style.display = "block";
     helpOutput.innerHTML = "Available commands: <br>" +
         "<br> Movement: <strong>Ahead / Reverse / Port / Starboard </strong><br>" +
         "<br> Engineering: Beam Up / Transfer / Use <br>" +
@@ -124,11 +124,11 @@ function helpButton() {
 }
 
 function closeHelpButton() {
-    document.getElementById('helpBox').style.display = "none";
+    document.getElementById("helpBox").style.display = "none";
 }
 
 // If user decides to press ENTER instead of ENGAGE
-var enterKey = document.getElementById('input');
+var enterKey = document.getElementById("input");
 enterKey.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
         e.preventDefault();
@@ -145,60 +145,60 @@ function enterButton() {
 
 // Various sound effects
 function engageSound() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/engage.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/engage.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 function errorSound()
 {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/fail.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/fail.mp3' autostart=true loop=false hidden=true>";
     return true; 
 }
 
 function nocomply() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/nocomply.mp3' autostart=true loop=false           hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/nocomply.mp3' autostart=true loop=false           hidden=true>";
     return true;
 }
 
 function transporter() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/transporter.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/transporter.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 function warp() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/warp.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/warp.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 function torpedo() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/torpedo.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/torpedo.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 function redAlert() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/alert.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/alert.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 function explode() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/explode.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/explode.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 function saveSound() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/ok.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/ok.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 function resumeSound() {
-    document.getElementById('embed').innerHTML = "<embed src='sounds/resume.mp3' autostart=true loop=false hidden=true>";
+    document.getElementById("embed").innerHTML = "<embed src='sounds/resume.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
 
 // Displaying the player's location
 render();
 // 
-document.getElementById('input').focus();
+document.getElementById("input").focus();
 
 // Main game logic and functions
 function playGame() {
@@ -228,9 +228,9 @@ function playGame() {
     case "ahead":
         if (playerLocation >= 3) {
             playerLocation -= 3;
-            var x = document.getElementById('crosshair').offsetTop;
+            var x = document.getElementById("crosshair").offsetTop;
             x = x - step;
-            document.getElementById('crosshair').style.top = x + "px";
+            document.getElementById("crosshair").style.top = x + "px";
             engageSound();
             } else {
                 gameMessages = "<br><br>" + blockedMovement[playerLocation];
@@ -241,9 +241,9 @@ function playGame() {
     case "reverse":
         if (playerLocation < 6) {
               playerLocation += 3;
-              var x = document.getElementById('crosshair').offsetTop;
+              var x = document.getElementById("crosshair").offsetTop;
               x = x + step;
-              document.getElementById('crosshair').style.top = x + "px";
+              document.getElementById("crosshair").style.top = x + "px";
               engageSound();
           } else {
               gameMessages = "<br><br>" + blockedMovement[playerLocation];
@@ -254,9 +254,9 @@ function playGame() {
     case "starboard":
         if (playerLocation %3 != 2) {
             playerLocation += 1;
-            var x = document.getElementById('crosshair').offsetLeft;
+            var x = document.getElementById("crosshair").offsetLeft;
             x = x + step;
-            document.getElementById('crosshair').style.left = x + "px";
+            document.getElementById("crosshair").style.left = x + "px";
             engageSound();
         } else {
             gameMessages = "<br><br>" + blockedMovement[playerLocation];
@@ -267,9 +267,9 @@ function playGame() {
     case "port":
         if (playerLocation %3 != 0) {
             playerLocation -= 1;
-            var x = document.getElementById('crosshair').offsetLeft;
+            var x = document.getElementById("crosshair").offsetLeft;
             x = x - step;
-            document.getElementById('crosshair').style.left = x + "px";
+            document.getElementById("crosshair").style.left = x + "px";
             engageSound();
         } else {
             gameMessages = "<br><br>" + blockedMovement[playerLocation];
@@ -278,19 +278,19 @@ function playGame() {
         break;
                 
     case "beam up":
-        beamUp()
+        beamUp();
         break;
                 
     case "transfer":
-        transfer()
+        transfer();
         break;
             
     case "use":
-        useItem()
+        useItem();
         break;
                 
     case "fire torpedos":
-        fireWeapon()
+        fireWeapon();
         break;
                 
     default:
@@ -301,30 +301,30 @@ function playGame() {
     // render the game
 render();
 input.value = "";
-document.getElementById('input').focus();
+document.getElementById("input").focus();
 }
 
 function moveCrosshair() {
    switch(playerLocation) {
        
     case 0:
-        document.getElementById('crosshair').style.left = "325px";
-        document.getElementById('crosshair').style.top = "23px";
+        document.getElementById("crosshair").style.left = "325px";
+        document.getElementById("crosshair").style.top = "23px";
         break;
 
     case 1:
-        document.getElementById('crosshair').style.left = "385px";
-        document.getElementById('crosshair').style.top = "23px";
+        document.getElementById("crosshair").style.left = "385px";
+        document.getElementById("crosshair").style.top = "23px";
         break;
              
     case 2:
-        document.getElementById('crosshair').style.left = "445px";
-        document.getElementById('crosshair').style.top = "23px";
+        document.getElementById("crosshair").style.left = "445px";
+        document.getElementById("crosshair").style.top = "23px";
         break;
 
     case 3:
-        document.getElementById('crosshair').style.left = "325px";
-        document.getElementById('crosshair').style.top = "83px";
+        document.getElementById("crosshair").style.left = "325px";
+        document.getElementById("crosshair").style.top = "83px";
         break;
 
     case 4:
@@ -332,23 +332,23 @@ function moveCrosshair() {
         break;
     
     case 5:
-        document.getElementById('crosshair').style.left = "445px";
-        document.getElementById('crosshair').style.top = "83px";
+        document.getElementById("crosshair").style.left = "445px";
+        document.getElementById("crosshair").style.top = "83px";
         break;
             
     case 6:
-        document.getElementById('crosshair').style.left = "325px";
-        document.getElementById('crosshair').style.top = "143px";
+        document.getElementById("crosshair").style.left = "325px";
+        document.getElementById("crosshair").style.top = "143px";
         break;
 
     case 7:
-        document.getElementById('crosshair').style.left = "385px";
-        document.getElementById('crosshair').style.top = "143px";
+        document.getElementById("crosshair").style.left = "385px";
+        document.getElementById("crosshair").style.top = "143px";
         break;
 
     case 8:
-        document.getElementById('crosshair').style.left = "445px";
-        document.getElementById('crosshair').style.top = "143px";
+        document.getElementById("crosshair").style.left = "445px";
+        document.getElementById("crosshair").style.top = "143px";
         break;
             
     default:
@@ -567,7 +567,7 @@ function saveGame() {
         localStorage.setItem("cargo_data_key", JSON.stringify(cargo));
         console.log(localStorage);
         input.value = "";
-        document.getElementById('input').focus();
+        document.getElementById("input").focus();
         output.innerHTML =  "Progress has been saved to onboard computer.";
     } else {
             // code if browser doesn't support localStorage
@@ -576,11 +576,11 @@ function saveGame() {
 
 //Return to saved state
 function resumeGame() {
-    var checkLocal = window.localStorage.getItem('player_data_key');
+    var checkLocal = window.localStorage.getItem("player_data_key");
         if (checkLocal === null || checkLocal === undefined || checkLocal === 0) {
             output.innerHTML = "No saved game exists.";
             errorSound();
-            document.getElementById('input').focus();              
+            document.getElementById("input").focus();              
         } else {
             // Pull all saved info from localStorage
             playerLocation = JSON.parse(localStorage.getItem("player_data_key"));
@@ -594,7 +594,7 @@ function resumeGame() {
             resumeSound();
             gameMessages = "";
             input.value = "";
-            document.getElementById('input').focus();
+            document.getElementById("input").focus();
             render();
         }
 }
