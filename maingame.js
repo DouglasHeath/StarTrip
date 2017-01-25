@@ -405,7 +405,7 @@ function saveGame() {
     saveSound();
     localStorage.clear();
     //make suere browser supports it
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         localStorage.setItem("player_data_key", JSON.stringify(playerLocation));
         localStorage.setItem("start_data_key", JSON.stringify(items));
         localStorage.setItem("appear_data_key", JSON.stringify(itemsToAppear));
