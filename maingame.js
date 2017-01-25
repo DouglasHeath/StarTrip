@@ -77,56 +77,21 @@ var helpOutput = document.querySelector("#helpOutput");
 var passengerOutput = document.querySelector("#passenger");
 var crystalOutput = document.querySelector("#dilithium");
 var alertOutput = document.querySelector("#alert");
-
-// Engage Button
-var engage = document.getElementById("inputButton");
-engage.addEventListener("click", enterButton, false);
-
-// Save Game Button
-var save = document.getElementById("saveGame");
-save.addEventListener("click", saveGame, false);
-
-// Resume Game Button
-var resume = document.getElementById("resumeGame");
-resume.addEventListener("click", resumeGame, false);
-
-// Help Button
-var help = document.getElementById("helpButton");
-help.addEventListener("click", helpButton, false);
-
-// Reset Button
-var resetButton = document.getElementById("resetGame");
-resetButton.addEventListener("click", resetGame, false);
-
-// Closing help box
-var closeHelp = document.getElementById("closeHelp");
-closeHelp.addEventListener("click", closeHelpButton, false);
-
 // Various buttons
 function helpButton() {
-    var el = document.getElementById("helpBox");
-    function fadeIn(el) {
-        el.style.opacity = 0;
-        var tick = function () {
-            el.style.opacity = +el.style.opacity + 0.05;
-            if (+el.style.opacity < 1) {
-                (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-            }
-        };
-        tick();
-    }
-    fadeIn(el); 
     document.getElementById("helpBox").style.display = "block";
     helpOutput.innerHTML = "Available commands: <br>" +
-        "<br> Movement: <strong>Ahead / Reverse / Port / Starboard </strong><br>" +
-        "<br> Engineering: Beam Up / Transfer / Use <br>" +
-        "<br> Weapons: Fire Torpedos";
+            "<br> Movement: <strong>Ahead / Reverse / Port / Starboard </strong><br>" +
+            "<br> Engineering: Beam Up / Transfer / Use <br>" +
+            "<br> Weapons: Fire Torpedos";
 }
-
+function validate(e) {
+    playGame();
+}
 function closeHelpButton() {
     document.getElementById("helpBox").style.display = "none";
+    document.getElementById("input").focus();
 }
-
 // If user decides to press ENTER instead of ENGAGE
 var enterKey = document.getElementById("input");
 enterKey.addEventListener("keydown", function (e) {
@@ -135,10 +100,6 @@ enterKey.addEventListener("keydown", function (e) {
         validate(e);
     }
 });
-function validate(e) {
-    playGame();
-}
-
 function enterButton() {
     playGame();
 }
@@ -149,10 +110,9 @@ function engageSound() {
     return true;
 }
 
-function errorSound()
-{
+function errorSound() {
     document.getElementById("embed").innerHTML = "<embed src='sounds/fail.mp3' autostart=true loop=false hidden=true>";
-    return true; 
+    return true;
 }
 
 function nocomply() {
@@ -198,113 +158,9 @@ function resumeSound() {
 // Displaying the player's location
 render();
 document.getElementById("input").focus();
-/*
-// Main game logic and functions
-function playGame() {
-     // These get reset from previous turn
-    gameMessages = "";
-    command = "";
-    // Get player command and convert it to lowercase
-    playersCommand = input.value;
-    playersCommand = playersCommand.toLowerCase();
-    // Variables used to move crosshair
-    var step = 60;
-    var x = "";
-    // Determine the player's command
-    for (i = 0; i < knownCommands.length; i++) {
-        if(playersCommand.indexOf(knownCommands[i]) !== -1) {
-            command = knownCommands[i];
-            break;
-        }
-    }
-    // Determine the item wanted
-    for (i = 0; i < knownItems.length; i++) {
-        if(playersCommand.indexOf(knownItems[i]) !== -1) {
-            item = knownItems[i];
-        }
-    }
-    // Choose correct command
-    switch(command) {
-    case "ahead":
-        if (playerLocation >= 3) {
-            playerLocation -= 3;
-            x = document.getElementById("crosshair").offsetTop;
-            x = x - step;
-            document.getElementById("crosshair").style.top = x + "px";
-            engageSound();
-            } else {
-                gameMessages = "<br><br>" + blockedMovement[playerLocation];
-                errorSound();
-            } 
-        break;
-                
-    case "reverse":
-        if (playerLocation < 6) {
-            playerLocation += 3;
-            x = document.getElementById("crosshair").offsetTop;
-            x = x + step;
-            document.getElementById("crosshair").style.top = x + "px";
-            engageSound();
-        } else {
-            gameMessages = "<br><br>" + blockedMovement[playerLocation];
-            errorSound();
-        }
-        break;
-                
-    case "starboard":
-        if (playerLocation % 3 !== 2) {
-            playerLocation += 1;
-            x = document.getElementById("crosshair").offsetLeft;
-            x = x + step;
-            document.getElementById("crosshair").style.left = x + "px";
-            engageSound();
-        } else {
-            gameMessages = "<br><br>" + blockedMovement[playerLocation];
-            errorSound();
-        }
-        break;
-                
-    case "port":
-        if (playerLocation % 3 !== 0) {
-            playerLocation -= 1;
-            x = document.getElementById("crosshair").offsetLeft;
-            x = x - step;
-            document.getElementById("crosshair").style.left = x + "px";
-            engageSound();
-        } else {
-            gameMessages = "<br><br>" + blockedMovement[playerLocation];
-            errorSound();
-        }
-        break;
-                
-    case "beam up":
-        beamUp();
-        break;
-                
-    case "transfer":
-        transfer();
-        break;
-            
-    case "use":
-        useItem();
-        break;
-                
-    case "fire torpedos":
-        fireWeapon();
-        break;
-                
-    default:
-        gameMessages = "<br><br>Invalid entry.";
-        errorSound();
-    }
-    // render the game
-render();
-input.value = "";
-document.getElementById("input").focus();
-} */
 
 function moveCrosshair() {
-   switch (playerLocation) {
+    switch (playerLocation) {
 
     case 0:
         document.getElementById("crosshair").style.left = "325px";
@@ -315,7 +171,7 @@ function moveCrosshair() {
         document.getElementById("crosshair").style.left = "385px";
         document.getElementById("crosshair").style.top = "23px";
         break;
-   
+
     case 2:
         document.getElementById("crosshair").style.left = "445px";
         document.getElementById("crosshair").style.top = "23px";
@@ -349,11 +205,7 @@ function moveCrosshair() {
         document.getElementById("crosshair").style.left = "445px";
         document.getElementById("crosshair").style.top = "143px";
         break;
-
-    default:
-
-        break;
-   }
+    }
 }
 
 function beamUp() {
@@ -363,12 +215,12 @@ function beamUp() {
     // Does it exist at this location?
     if (itemIndex !== -1 && itemLocations[itemIndex] === playerLocation) {
         gameMessages = "<br><br>You have beamed aboard the " + item + ".";
-        transporter();          
+        transporter();
         // Add it to the player's inventory
-        cargo.push(item);    
+        cargo.push(item);
         // Remove it from the game
         items.splice(itemIndex, 1);
-        itemLocations.splice(itemIndex, 1);    
+        itemLocations.splice(itemIndex, 1);
         // Console tests
         console.log("World items: " + items);
         console.log("Storage items: " + cargo);
@@ -384,7 +236,7 @@ function beamUp() {
         // Error if item isn't at the current location
         errorSound();
         gameMessages = "<br><br>There is either nothing to beam up" +
-            "<br>  or you haven't specified target.";
+                "<br>  or you haven't specified target.";
     }
 }
 
@@ -400,11 +252,11 @@ function destroyed() {
 function fireWeapon() {
     // First find index of where the item is in the array
     var itemIndex = romulan.indexOf(romulan);
-    
+
     if (playerLocation === 6) {
         alertOutput.innerHTML = "ALERT <br>" + "<br>" +
-            "<br> Condition" +
-            "<br> RED";
+                "<br> Condition" +
+                "<br> RED";
         torpedo();
         gameMessages = "<br><br>Photon torpedos fired!";
         setTimeout(destroyed, 2000);
@@ -413,19 +265,19 @@ function fireWeapon() {
         // Error if item isn't at the current location
         errorSound();
         gameMessages = "<br><br>There is nothing to fire weapons at" +
-            "<br>  or you haven't specified target.";
+                "<br>  or you haven't specified target.";
     }
 }
 
 function transfer() {
     // First, find out if item is in storage
-    var storageIndex = cargo.indexOf(item);  
+    var storageIndex = cargo.indexOf(item);
     // If the index is -1, it isn't in storage
     // Alert player to the fact it isn't in storage
     if (storageIndex === -1) {
         gameMessages = "<br><br>Invalid entry.";
         errorSound();
-    } 
+    }
     if (storageIndex === 0) {
         gameMessages = "<br><br>Cargo hold is empty.";
         errorSound();
@@ -433,21 +285,20 @@ function transfer() {
     // If the item is in storage, determine the use
     if (storageIndex !== -1) {
         switch (item) {
-        case "dignitary":        
-            if(playerLocation === 0) {
-                gameMessages = "<br><br>The Dignitary from Andros III thanks you for safe passage." +
-                    "<br><br>Engineering states that the impulse engines will need dilithium before entering wormhole.";
+        case "dignitary":
+            if (playerLocation === 0) {
+                gameMessages = "<br><br>The Dignitary from Andros III thanks you for safe passage." + "<br><br>Engineering states that the impulse engines will need dilithium before entering wormhole.";
                 cargo.splice(storageIndex, 1);
                 passengerOutput.innerHTML = "";
                 itemsToAppear.push("dilithium");
                 transporter();
             } else {
-                gameMessages = "<br><br>This isn't a suitable location for transfer." + 
-                    "<br>The Dignitary from Andros III grows impatient.";
+                gameMessages = "<br><br>This isn't a suitable location for transfer." +
+                        "<br>The Dignitary from Andros III grows impatient.";
                 errorSound();
             }
             break;
-                        
+
         case "dilithium":
             gameMessages = "<br>Engineering suggest holding on to the dilithium.";
             errorSound();
@@ -458,21 +309,21 @@ function transfer() {
 
 function useItem() {
     // First, find out if item is in storage
-    var storageIndex = cargo.indexOf(item);  
+    var storageIndex = cargo.indexOf(item);
     // If the index is -1, it isn't in storage
     // Alert player to the fact it isn't in storage
     if (storageIndex === -1) {
         gameMessages = "<br><br>Invalid entry.";
         errorSound();
-    }  
+    }
     // If there isn't anything in storage then tell player
     if (storageIndex === 0) {
-        gameMessages ="<br><br>Cargo hold is empty.";
+        gameMessages = "<br><br>Cargo hold is empty.";
         errorSound();
     }
     // If the item is in storage, determine the use
-    if (storageIndex !== -1) {   
-        switch(item) {
+    if (storageIndex !== -1) {
+        switch (item) {
         case "dilithium":
             if (playerLocation === 3) {
                 gameMessages = "<br><br>The dilithium has been used to power the impulse engines.";
@@ -485,7 +336,7 @@ function useItem() {
                 errorSound();
             }
             break;
-                        
+
         case "dignitary":
             gameMessages = "<br><br>Invalid entry.";
             errorSound();
@@ -498,11 +349,12 @@ function useItem() {
 function render() {
     // Render the location
     output.innerHTML = gameMap[playerLocation];
-    image.src ="images/" + mapImages[playerLocation];
+    image.src = "images/" + mapImages[playerLocation];
     alertOutput.innerHTML = "";
+    var i = "";
     // If there is any item in this location, display it
     // Loop through all of the items
-    for (var i = 0; i < items.length; i ++) {
+    for (i = 0; i < items.length; i += 1) {
         // Find if there's an item here
         if (playerLocation === itemLocations[i]) {
             // Display the item
@@ -510,29 +362,27 @@ function render() {
                 + items[i] + "</em> found in this sector.";
         }
     }
-    for (var i = 0; i < romulan.length; i ++) {
+    for (i = 0; i < romulan.length; i += 1) {
         if (playerLocation === romLocation[i]) {
             output.innerHTML += "<br><br>Sensors indicate <em>"
                 + romulan[i] + "</em> found in this sector.";
             alertOutput.innerHTML = "ALERT <br>" + "<br>" +
-                "<br> Condition" +
-                "<br> RED";
+                    "<br> Condition" + "<br> RED";
             redAlert();
         }
     }
-    for (var i = 0; i < itemsToAppear.length; i ++) {
-            if(playerLocation === itemsToAppearLocations[i]) {
-                // Display the item
-                output.innerHTML += "<br><br>Sensors indicate <em>"
-                    + itemsToAppear[i] + "</em> found in this sector.";
-            }
+    for (i = 0; i < itemsToAppear.length; i += 1) {
+        if (playerLocation === itemsToAppearLocations[i]) {
+            // Display the item
+            output.innerHTML += "<br><br>Sensors indicate <em>"
+                + itemsToAppear[i] + "</em> found in this sector.";
+        }
     }
-    
     // Display the game message and update inventory 
-    output.innerHTML += "<br>" + gameMessages; 
+    output.innerHTML += "<br>" + gameMessages;
     // Display storage
     if (cargo.length !== 0) {
-        switch(item) {
+        switch (item) {
         case "dignitary":
             passengerOutput.innerHTML = "Dignitary onboard";
             break;
@@ -540,7 +390,7 @@ function render() {
         case "dilithium":
             crystalOutput.innerHTML = "Dilithium onboard";
             break;
-        }       
+        }
     }
     passengerOutput.innerHTML += "";
     crystalOutput.innerHTML += "";
@@ -555,7 +405,7 @@ function saveGame() {
     saveSound();
     localStorage.clear();
     //make suere browser supports it
-    if (typeof(Storage)!=="undefined") {
+    if (typeof(Storage) !== "undefined") {
         localStorage.setItem("player_data_key", JSON.stringify(playerLocation));
         localStorage.setItem("start_data_key", JSON.stringify(items));
         localStorage.setItem("appear_data_key", JSON.stringify(itemsToAppear));
@@ -574,26 +424,26 @@ function saveGame() {
 //Return to saved state
 function resumeGame() {
     var checkLocal = window.localStorage.getItem("player_data_key");
-        if (checkLocal === null || checkLocal === undefined || checkLocal === 0) {
-            output.innerHTML = "No saved game exists.";
-            errorSound();
-            document.getElementById("input").focus();              
-        } else {
-            // Pull all saved info from localStorage
-            playerLocation = JSON.parse(localStorage.getItem("player_data_key"));
-            items = JSON.parse(localStorage.getItem("start_data_key"));
-            itemsToAppear = JSON.parse(localStorage.getItem("appear_data_key"));    
-            item = JSON.parse(localStorage.getItem("item_data_key"));
-            mapImages = JSON.parse(localStorage.getItem("map_data_key"));
-            romulan = JSON.parse(localStorage.getItem("romulan_data_key"));
-            cargo = JSON.parse(localStorage.getItem("cargo_data_key"));
-            moveCrosshair();
-            resumeSound();
-            gameMessages = "";
-            input.value = "";
-            document.getElementById("input").focus();
-            render();
-        }
+    if (checkLocal === null || checkLocal === undefined || checkLocal === 0) {
+        output.innerHTML = "No saved game exists.";
+        errorSound();
+        document.getElementById("input").focus();
+    } else {
+        // Pull all saved info from localStorage
+        playerLocation = JSON.parse(localStorage.getItem("player_data_key"));
+        items = JSON.parse(localStorage.getItem("start_data_key"));
+        itemsToAppear = JSON.parse(localStorage.getItem("appear_data_key"));
+        item = JSON.parse(localStorage.getItem("item_data_key"));
+        mapImages = JSON.parse(localStorage.getItem("map_data_key"));
+        romulan = JSON.parse(localStorage.getItem("romulan_data_key"));
+        cargo = JSON.parse(localStorage.getItem("cargo_data_key"));
+        moveCrosshair();
+        resumeSound();
+        gameMessages = "";
+        input.value = "";
+        document.getElementById("input").focus();
+        render();
+    }
 }
 // Reset entire game
 function resetGame() {
@@ -615,21 +465,22 @@ function playGame() {
     // Variables used to move crosshair
     var step = 60;
     var x = "";
+    var i = "";
     // Determine the player's command
-    for (i = 0; i < knownCommands.length; i++) {
-        if(playersCommand.indexOf(knownCommands[i]) !== -1) {
+    for (i = 0; i < knownCommands.length; i += 1) {
+        if (playersCommand.indexOf(knownCommands[i]) !== -1) {
             command = knownCommands[i];
             break;
         }
     }
     // Determine the item wanted
-    for (i = 0; i < knownItems.length; i++) {
-        if(playersCommand.indexOf(knownItems[i]) !== -1) {
+    for (i = 0; i < knownItems.length; i += 1) {
+        if (playersCommand.indexOf(knownItems[i]) !== -1) {
             item = knownItems[i];
         }
     }
     // Choose correct command
-    switch(command) {
+    switch (command) {
     case "ahead":
         if (playerLocation >= 3) {
             playerLocation -= 3;
@@ -637,12 +488,12 @@ function playGame() {
             x = x - step;
             document.getElementById("crosshair").style.top = x + "px";
             engageSound();
-            } else {
-                gameMessages = "<br><br>" + blockedMovement[playerLocation];
-                errorSound();
-            } 
+        } else {
+            gameMessages = "<br><br>" + blockedMovement[playerLocation];
+            errorSound();
+        }
         break;
-                
+
     case "reverse":
         if (playerLocation < 6) {
             playerLocation += 3;
@@ -655,7 +506,7 @@ function playGame() {
             errorSound();
         }
         break;
-                
+
     case "starboard":
         if (playerLocation % 3 !== 2) {
             playerLocation += 1;
@@ -668,7 +519,7 @@ function playGame() {
             errorSound();
         }
         break;
-                
+
     case "port":
         if (playerLocation % 3 !== 0) {
             playerLocation -= 1;
@@ -681,29 +532,53 @@ function playGame() {
             errorSound();
         }
         break;
-                
+
     case "beam up":
         beamUp();
         break;
-                
+
     case "transfer":
         transfer();
         break;
-            
+
     case "use":
         useItem();
         break;
-                
+
     case "fire torpedos":
         fireWeapon();
         break;
-                
+
     default:
         gameMessages = "<br><br>Invalid entry.";
         errorSound();
     }
     // render the game
-render();
-input.value = "";
-document.getElementById("input").focus();
+    render();
+    input.value = "";
+    document.getElementById("input").focus();
 }
+
+// Engage Button
+var engage = document.getElementById("inputButton");
+engage.addEventListener("click", enterButton, false);
+
+// Save Game Button
+var save = document.getElementById("saveGame");
+save.addEventListener("click", saveGame, false);
+
+// Resume Game Button
+var resume = document.getElementById("resumeGame");
+resume.addEventListener("click", resumeGame, false);
+
+// Help Button
+var help = document.getElementById("helpButton");
+help.addEventListener("click", helpButton, false);
+
+// Reset Button
+var resetButton = document.getElementById("resetGame");
+resetButton.addEventListener("click", resetGame, false);
+
+// Closing help box
+var closeHelp = document.getElementById("closeHelp");
+closeHelp.addEventListener("click", closeHelpButton, false);
