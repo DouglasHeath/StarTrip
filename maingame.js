@@ -77,7 +77,111 @@ var helpOutput = document.querySelector("#helpOutput");
 var passengerOutput = document.querySelector("#passenger");
 var crystalOutput = document.querySelector("#dilithium");
 var alertOutput = document.querySelector("#alert");
-// Various buttons
+
+function playGame() {
+     // These get reset from previous turn
+    gameMessages = "";
+    command = "";
+    // Get player command and convert it to lowercase
+    playersCommand = input.value;
+    playersCommand = playersCommand.toLowerCase();
+    // Variables used to move crosshair
+    var step = 60;
+    var x = "";
+    var i = "";
+    // Determine the player's command
+    for (i = 0; i < knownCommands.length; i += 1) {
+        if (playersCommand.indexOf(knownCommands[i]) !== -1) {
+            command = knownCommands[i];
+            break;
+        }
+    }
+    // Determine the item wanted
+    for (i = 0; i < knownItems.length; i += 1) {
+        if (playersCommand.indexOf(knownItems[i]) !== -1) {
+            item = knownItems[i];
+        }
+    }
+    // Choose correct command
+    switch (command) {
+    case "ahead":
+        if (playerLocation >= 3) {
+            playerLocation -= 3;
+            x = document.getElementById("crosshair").offsetTop;
+            x = x - step;
+            document.getElementById("crosshair").style.top = x + "px";
+            engageSound();
+        } else {
+            gameMessages = "<br><br>" + blockedMovement[playerLocation];
+            errorSound();
+        }
+        break;
+
+    case "reverse":
+        if (playerLocation < 6) {
+            playerLocation += 3;
+            x = document.getElementById("crosshair").offsetTop;
+            x = x + step;
+            document.getElementById("crosshair").style.top = x + "px";
+            engageSound();
+        } else {
+            gameMessages = "<br><br>" + blockedMovement[playerLocation];
+            errorSound();
+        }
+        break;
+
+    case "starboard":
+        if (playerLocation % 3 !== 2) {
+            playerLocation += 1;
+            x = document.getElementById("crosshair").offsetLeft;
+            x = x + step;
+            document.getElementById("crosshair").style.left = x + "px";
+            engageSound();
+        } else {
+            gameMessages = "<br><br>" + blockedMovement[playerLocation];
+            errorSound();
+        }
+        break;
+
+    case "port":
+        if (playerLocation % 3 !== 0) {
+            playerLocation -= 1;
+            x = document.getElementById("crosshair").offsetLeft;
+            x = x - step;
+            document.getElementById("crosshair").style.left = x + "px";
+            engageSound();
+        } else {
+            gameMessages = "<br><br>" + blockedMovement[playerLocation];
+            errorSound();
+        }
+        break;
+
+    case "beam up":
+        beamUp();
+        break;
+
+    case "transfer":
+        transfer();
+        break;
+
+    case "use":
+        useItem();
+        break;
+
+    case "fire torpedos":
+        fireWeapon();
+        break;
+
+    default:
+        gameMessages = "<br><br>Invalid entry.";
+        errorSound();
+    }
+    // render the game
+    render();
+    input.value = "";
+    document.getElementById("input").focus();
+}
+
 function helpButton() {
     document.getElementById("helpBox").style.display = "block";
     helpOutput.innerHTML = "Available commands: <br>" +
@@ -85,9 +189,11 @@ function helpButton() {
             "<br> Engineering: Beam Up / Transfer / Use <br>" +
             "<br> Weapons: Fire Torpedos";
 }
+
 function validate(e) {
     playGame();
 }
+
 function closeHelpButton() {
     document.getElementById("helpBox").style.display = "none";
     document.getElementById("input").focus();
@@ -104,6 +210,59 @@ function enterButton() {
     playGame();
 }
 
+function render() {
+    // Render the location
+    output.innerHTML = gameMap[playerLocation];
+    image.src = "images/" + mapImages[playerLocation];
+    alertOutput.innerHTML = "";
+    var i = "";
+    // If there is any item in this location, display it
+    // Loop through all of the items
+    for (i = 0; i < items.length; i += 1) {
+        // Find if there's an item here
+        if (playerLocation === itemLocations[i]) {
+            // Display the item
+            output.innerHTML += "<br><br>Sensors indicate <em>"
+                    + items[i] + "</em> found in this sector.";
+        }
+    }
+    for (i = 0; i < romulan.length; i += 1) {
+        if (playerLocation === romLocation[i]) {
+            output.innerHTML += "<br><br>Sensors indicate <em>"
+                    + romulan[i] + "</em> found in this sector.";
+            alertOutput.innerHTML = "ALERT <br>" + "<br>" +
+                    "<br> Condition" + "<br> RED";
+            redAlert();
+        }
+    }
+    for (i = 0; i < itemsToAppear.length; i += 1) {
+        if (playerLocation === itemsToAppearLocations[i]) {
+            // Display the item
+            output.innerHTML += "<br><br>Sensors indicate <em>"
+                    + itemsToAppear[i] + "</em> found in this sector.";
+        }
+    }
+    // Display the game message and update inventory
+    output.innerHTML += "<br>" + gameMessages;
+    // Display storage
+    if (cargo.length !== 0) {
+        switch (item) {
+        case "dignitary":
+            passengerOutput.innerHTML = "Dignitary onboard";
+            break;
+
+        case "dilithium":
+            crystalOutput.innerHTML = "Dilithium onboard";
+            break;
+        }
+    }
+    passengerOutput.innerHTML += "";
+    crystalOutput.innerHTML += "";
+}
+
+function endGame() {
+    window.location.href = "Endpage.html";
+}
 // Various sound effects
 function engageSound() {
     document.getElementById("embed").innerHTML = "<embed src='sounds/engage.mp3' autostart=true loop=false hidden=true>";
@@ -154,10 +313,6 @@ function resumeSound() {
     document.getElementById("embed").innerHTML = "<embed src='sounds/resume.mp3' autostart=true loop=false hidden=true>";
     return true;
 }
-
-// Displaying the player's location
-render();
-document.getElementById("input").focus();
 
 function moveCrosshair() {
     switch (playerLocation) {
@@ -346,66 +501,12 @@ function useItem() {
     }
 }
 
-function render() {
-    // Render the location
-    output.innerHTML = gameMap[playerLocation];
-    image.src = "images/" + mapImages[playerLocation];
-    alertOutput.innerHTML = "";
-    var i = "";
-    // If there is any item in this location, display it
-    // Loop through all of the items
-    for (i = 0; i < items.length; i += 1) {
-        // Find if there's an item here
-        if (playerLocation === itemLocations[i]) {
-            // Display the item
-            output.innerHTML += "<br><br>Sensors indicate <em>"
-                    + items[i] + "</em> found in this sector.";
-        }
-    }
-    for (i = 0; i < romulan.length; i += 1) {
-        if (playerLocation === romLocation[i]) {
-            output.innerHTML += "<br><br>Sensors indicate <em>"
-                    + romulan[i] + "</em> found in this sector.";
-            alertOutput.innerHTML = "ALERT <br>" + "<br>" +
-                    "<br> Condition" + "<br> RED";
-            redAlert();
-        }
-    }
-    for (i = 0; i < itemsToAppear.length; i += 1) {
-        if (playerLocation === itemsToAppearLocations[i]) {
-            // Display the item
-            output.innerHTML += "<br><br>Sensors indicate <em>"
-                    + itemsToAppear[i] + "</em> found in this sector.";
-        }
-    }
-    // Display the game message and update inventory
-    output.innerHTML += "<br>" + gameMessages;
-    // Display storage
-    if (cargo.length !== 0) {
-        switch (item) {
-        case "dignitary":
-            passengerOutput.innerHTML = "Dignitary onboard";
-            break;
-
-        case "dilithium":
-            crystalOutput.innerHTML = "Dilithium onboard";
-            break;
-        }
-    }
-    passengerOutput.innerHTML += "";
-    crystalOutput.innerHTML += "";
-}
-
-function endGame() {
-    window.location.href = "Endpage.html";
-}
-
 // Save game state for returning to it later
 function saveGame() {
     saveSound();
     localStorage.clear();
     //make suere browser supports it
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         localStorage.setItem("player_data_key", JSON.stringify(playerLocation));
         localStorage.setItem("start_data_key", JSON.stringify(items));
         localStorage.setItem("appear_data_key", JSON.stringify(itemsToAppear));
@@ -454,110 +555,10 @@ function resetGame() {
 function localStorageCheck() {
     console.log(localStorage);
 }
-// Main game logic and functions
-function playGame() {
-     // These get reset from previous turn
-    gameMessages = "";
-    command = "";
-    // Get player command and convert it to lowercase
-    playersCommand = input.value;
-    playersCommand = playersCommand.toLowerCase();
-    // Variables used to move crosshair
-    var step = 60;
-    var x = "";
-    var i = "";
-    // Determine the player's command
-    for (i = 0; i < knownCommands.length; i += 1) {
-        if (playersCommand.indexOf(knownCommands[i]) !== -1) {
-            command = knownCommands[i];
-            break;
-        }
-    }
-    // Determine the item wanted
-    for (i = 0; i < knownItems.length; i += 1) {
-        if (playersCommand.indexOf(knownItems[i]) !== -1) {
-            item = knownItems[i];
-        }
-    }
-    // Choose correct command
-    switch (command) {
-    case "ahead":
-        if (playerLocation >= 3) {
-            playerLocation -= 3;
-            x = document.getElementById("crosshair").offsetTop;
-            x = x - step;
-            document.getElementById("crosshair").style.top = x + "px";
-            engageSound();
-        } else {
-            gameMessages = "<br><br>" + blockedMovement[playerLocation];
-            errorSound();
-        }
-        break;
 
-    case "reverse":
-        if (playerLocation < 6) {
-            playerLocation += 3;
-            x = document.getElementById("crosshair").offsetTop;
-            x = x + step;
-            document.getElementById("crosshair").style.top = x + "px";
-            engageSound();
-        } else {
-            gameMessages = "<br><br>" + blockedMovement[playerLocation];
-            errorSound();
-        }
-        break;
-
-    case "starboard":
-        if (playerLocation % 3 !== 2) {
-            playerLocation += 1;
-            x = document.getElementById("crosshair").offsetLeft;
-            x = x + step;
-            document.getElementById("crosshair").style.left = x + "px";
-            engageSound();
-        } else {
-            gameMessages = "<br><br>" + blockedMovement[playerLocation];
-            errorSound();
-        }
-        break;
-
-    case "port":
-        if (playerLocation % 3 !== 0) {
-            playerLocation -= 1;
-            x = document.getElementById("crosshair").offsetLeft;
-            x = x - step;
-            document.getElementById("crosshair").style.left = x + "px";
-            engageSound();
-        } else {
-            gameMessages = "<br><br>" + blockedMovement[playerLocation];
-            errorSound();
-        }
-        break;
-
-    case "beam up":
-        beamUp();
-        break;
-
-    case "transfer":
-        transfer();
-        break;
-
-    case "use":
-        useItem();
-        break;
-
-    case "fire torpedos":
-        fireWeapon();
-        break;
-
-    default:
-        gameMessages = "<br><br>Invalid entry.";
-        errorSound();
-    }
-    // render the game
-    render();
-    input.value = "";
-    document.getElementById("input").focus();
-}
+// Displaying the player's location
+render();
+document.getElementById("input").focus();
 
 // Engage Button
 var engage = document.getElementById("inputButton");
