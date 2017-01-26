@@ -222,14 +222,14 @@ function render() {
         // Find if there's an item here
         if (playerLocation === itemLocations[i]) {
             // Display the item
-            output.innerHTML += "<br><br>Sensors indicate <em>"
-                    + items[i] + "</em> found in this sector.";
+            output.innerHTML += "<br><br>Sensors indicate <em>" +
+                items[i] + "</em> found in this sector.";
         }
     }
     for (i = 0; i < romulan.length; i += 1) {
         if (playerLocation === romLocation[i]) {
-            output.innerHTML += "<br><br>Sensors indicate <em>"
-                    + romulan[i] + "</em> found in this sector.";
+            output.innerHTML += "<br><br>Sensors indicate <em>" +
+                romulan[i] + "</em> found in this sector.";
             alertOutput.innerHTML = "ALERT <br>" + "<br>" +
                     "<br> Condition" + "<br> RED";
             redAlert();
@@ -238,8 +238,8 @@ function render() {
     for (i = 0; i < itemsToAppear.length; i += 1) {
         if (playerLocation === itemsToAppearLocations[i]) {
             // Display the item
-            output.innerHTML += "<br><br>Sensors indicate <em>"
-                    + itemsToAppear[i] + "</em> found in this sector.";
+            output.innerHTML += "<br><br>Sensors indicate <em>" +
+                itemsToAppear[i] + "</em> found in this sector.";
         }
     }
     // Display the game message and update inventory
