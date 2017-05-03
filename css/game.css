@@ -27,7 +27,7 @@ h3
     background-image: url(../images/title.jpg);
     width: 1500px;
     height: 900px;
-    position: aboslute;
+    position: absolute;
     margin: 0 auto;
     background-color: black;
     font-family: 'Play', sans-serif;
