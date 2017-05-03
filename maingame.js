@@ -1,4 +1,3 @@
-$(document).ready() {
 // Initialize the game map
 var gameMap = [];
 
@@ -584,5 +583,3 @@ resetButton.addEventListener("click", resetGame, false);
 // Closing help box
 var closeHelp = document.getElementById("closeHelp");
 closeHelp.addEventListener("click", closeHelpButton, false);
-
-};
